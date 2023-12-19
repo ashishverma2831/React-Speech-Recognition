@@ -31,7 +31,7 @@ const Speech = () => {
                 </button> */}
             </div>
             {/* <p className='px-4 py-5 min-h-[10vh] m-2 border border-gray-700 shadow' onClick={()=>setCopiedText(transcript)}> */}
-            <p className='px-4 py-5 min-h-[10vh] m-2 border border-gray-700 shadow'>
+            <p className='px-4 py-5 mb-4 min-h-[10vh] m-2 border border-gray-700 shadow'>
                 {transcript}
             </p>
             <button onClick={startListening} className='bg-blue-400 py-2 mb-2 px-6 rounded hover:bg-blue-600 text-white font-medium tracking-wide'>Start Listening</button>
