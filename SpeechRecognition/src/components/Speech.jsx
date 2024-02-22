@@ -20,6 +20,49 @@ const Speech = () => {
     //     successDuration: 3000,
     //   });
 
+    const [message, setMessage] = useState('')
+  const commands = [
+    {
+      command: 'I would like to order *',
+      callback: (food) => setMessage(`Your order is for: ${food}`)
+    },
+    {
+      command: 'The weather is :condition today',
+      callback: (condition) => setMessage(`Today, the weather is ${condition}`)
+    },
+    {
+      command: 'My top sports are * and *',
+      callback: (sport1, sport2) => setMessage(`#1: ${sport1}, #2: ${sport2}`)
+    },
+    {
+      command: 'Pass the salt (please)',
+      callback: () => setMessage('My pleasure')
+    },
+    {
+      command: ['Hello', 'Hi'],
+      callback: ({ command }) => setMessage(`Hi there! You said: "${command}"`),
+      matchInterim: true
+    },
+    {
+      command: 'Beijing',
+      callback: (command, spokenPhrase, similarityRatio) => setMessage(`${command} and ${spokenPhrase} are ${similarityRatio * 100}% similar`),
+      // If the spokenPhrase is "Benji", the message would be "Beijing and Benji are 40% similar"
+      isFuzzyMatch: true,
+      fuzzyMatchingThreshold: 0.2
+    },
+    {
+      command: ['eat', 'sleep', 'leave'],
+      callback: (command) => setMessage(`Best matching command: ${command}`),
+      isFuzzyMatch: true,
+      fuzzyMatchingThreshold: 0.2,
+      bestMatchOnly: true
+    },
+    {
+      command: 'clear',
+      callback: ({ resetTranscript }) => resetTranscript()
+    }
+  ]
+
   return (
     <>
         <div className='container w-full flex flex-col md:w-10/12 xl:w-8/12 mx-auto shadow-md p-8 rounded'>
@@ -31,6 +74,9 @@ const Speech = () => {
                 </button> */}
             </div>
             {/* <p className='px-4 py-5 min-h-[10vh] m-2 border border-gray-700 shadow' onClick={()=>setCopiedText(transcript)}> */}
+            <p className='px-4 py-5 mb-4 min-h-[10vh] m-2 border border-gray-700 shadow'>
+                {message}
+            </p>
             <p className='px-4 py-5 mb-4 min-h-[10vh] m-2 border border-gray-700 shadow'>
                 {transcript}
             </p>
